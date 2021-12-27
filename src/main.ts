@@ -1,8 +1,19 @@
 import { createApp } from 'vue'
-import { Vue } from 'vue-class-component'
-import VueRouter from 'vue-router'
 import App from './App.vue'
 import './assets/tailwind.css'
 import router from './routes'
+import axios, {AxiosStatic} from 'axios'
 
-createApp(App).use(router).mount('#app')
+//create app
+const app = createApp(App);
+// add routes
+app.use(router);
+// add $axios command globally
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties {
+        $axios: AxiosStatic
+    }
+}
+app.config.globalProperties.$axios = axios;
+// mount app to index.html
+app.mount('#app');
