@@ -4,8 +4,10 @@
         <p>This is a test page for the web-rtc protocol</p>
         <p>More information have be found at <a href="https://webrtc.org/">webrtc.org</a> and at <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API">developer.mozilla.org</a></p>
         <p>Code samples can be found on <a href="https://webrtc.github.io/samples/">github</a></p>
-        <video :srcObject.prop="localStream" autoplay class="m-4 mx-auto bg-black"></video>
-        <video :srcObject.prop="remoteStream" autoplay class="m-4 mx-auto bg-black"></video>
+        <div class= "flex justify-center">
+            <video :srcObject.prop="localStream" autoplay class="m-4 mx-auto bg-black"></video>
+            <video :srcObject.prop="remoteStream" autoplay class="m-4 mx-auto bg-black"></video>
+        </div>
         <button @click="start" :disabled="disable.start" class="m-4 bg-blue-800" :class="{'opacity-50':disable.start}">start</button>
         <button @click="call" :disabled="disable.call" class="m-4 bg-green-800" :class="{'opacity-50':disable.call}">call</button>
         <button @click="hangup" :disabled="disable.hangup" class="m-4 bg-red-800" :class="{'opacity-50':disable.hangup}">hangup</button>
@@ -35,6 +37,7 @@ export default defineComponent({
     },
     methods: {
         async start() {
+            console.log('starting local stream');
             this.disable.start = true;
             this.disable.hangup = true;
             const devices = await navigator.mediaDevices.enumerateDevices();
@@ -53,6 +56,7 @@ export default defineComponent({
         },
         async call() {
             this.disable.start = true;
+            this.disable.call = true;
             this.disable.hangup = false;
             console.log('starting', window.performance.now());
             const videoTracks = this.localStream.getVideoTracks();
@@ -179,7 +183,7 @@ export default defineComponent({
             this.pc1 = new RTCPeerConnection();
             this.pc2 = new RTCPeerConnection();
             this.disable.start = false;
-            this.disable.call = false;
+            this.disable.call = true;
             this.disable.hangup = true;
             this.localStream.getTracks().forEach(track => track.stop());
             this.remoteStream.getTracks().forEach(track => track.stop());
