@@ -32,15 +32,15 @@ export default defineComponent({
         },
         handleError(error:Error) {
             this.stop()
-            if (error.name === 'OverconstrainedError') {
+            if (error.name == 'OverconstrainedError') {
                 // const v = this.constraints.video;
                 // this.errorMsg(`The resolution ${v.width.exact}x${v.height.exact} px is not supported by your device.`);
                 this.errorMsg('The resolution is not supported by your device.');
-            } else if (error.name === 'NotAllowedError') {
+            } else if (error.name == 'NotAllowedError') {
                 this.errorMsg('Permissions have not been granted to use your camera and ' +
                     'microphone, you need to allow the page access to your devices in ' +
                     'order for the demo to work.');
-            } else if (error.name === 'NotFoundError') {
+            } else if (error.name == 'NotFoundError') {
                 this.errorMsg('A usable media device was not found on your system');
             } else {
                 this.errorMsg(`getUserMedia error: ${error.name}`, error);
@@ -56,8 +56,8 @@ export default defineComponent({
             this.disable.start = true;
             this.disable.stop = false;
             const devices = await navigator.mediaDevices.enumerateDevices();
-            const hasmic:boolean = devices.some(d => d.kind === 'audioinput');
-            const hascam:boolean = devices.some(d => d.kind === 'videoinput');
+            const hasmic:boolean = devices.some(d => d.kind == 'audioinput');
+            const hascam:boolean = devices.some(d => d.kind == 'videoinput');
             navigator.mediaDevices
                 .getUserMedia({ audio: hasmic, video: hascam })
                 .then(this.handleSuccess)
