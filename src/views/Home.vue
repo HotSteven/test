@@ -79,7 +79,7 @@ export default defineComponent({
             console.log('Created remote peer connection object pc2');
             pc2.addEventListener('icecandidate', e => this.onIceCandidate(pc2, e));
             pc2.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(pc2, e));
-            // pc2.addEventListener('track', gotRemoteStream);
+            pc2.addEventListener('track', this.onGetRemoteStream);
 
             // add data to the local stream
             this.localStream.getTracks().forEach(track => pc1.addTrack(track, this.localStream));
@@ -168,6 +168,12 @@ export default defineComponent({
             if (pc) {
                 console.log(`${this.getName(pc)} ICE state: ${pc.iceConnectionState}`);
                 console.log('ICE state change event: ', event);
+            }
+        },
+        onGetRemoteStream(event:RTCTrackEvent) {
+            if (this.remoteStream !== event.streams[0]) {
+                this.remoteStream = event.streams[0];
+                console.log('pc2 received remote stream');
             }
         },
         getName(pc:RTCPeerConnection) {
