@@ -1,9 +1,9 @@
 <template>
-  <div id="nav" class="mb-4">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/tools">Tools</router-link> |
-    <router-link to="/axios">Axios</router-link>
-  </div>
-  <router-view />
+    <Menu></Menu>
+    <router-view />
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Menu from '@/components/Menu.vue'
+export default defineComponent({ components: { Menu }})
+</script>

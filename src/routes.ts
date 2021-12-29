@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Axios from '@/views/Axios.vue'
 import Tools from '@/views/Tools.vue'
+import WebRTC from '@/views/WebRTC.vue'
 import NotFound from '@/views/404.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/tools',
     name: 'Tools',
     component: Tools
+  },
+  {
+    path: '/webrtc',
+    name: 'WebRTC',
+    component: WebRTC
   },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
 ]
