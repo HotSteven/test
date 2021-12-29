@@ -6,7 +6,7 @@
     <div v-else>
         {{thingtodo}}
     </div>
-    <button @click="getNewActivity" class="mt-4 bg-blue-600">Get New Activity</button>
+    <button @click="getNewActivity" class="mt-4 bg-blue-600" :disabled="loading" :class="{'opactiy-50':loading}">Get New Activity</button>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'
