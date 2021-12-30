@@ -9,11 +9,11 @@
         <div class="w-fit mx-auto text-right">
             <label class="p-2 block">
                 Alarm Time (minutes)
-                <input type="number" v-model="alarm.minutes" class="text-black px-2 py-1 bg-gray-300 w-14" :disabled="running" :class="{'opacity-50':running}" />
+                <input type="number" v-model="alarm.minutes" class="w-14" :disabled="running" :class="{'opacity-50':running}" />
             </label>
             <label class="p-2 block">
                 Warn Time (minutes)
-                <input type="number" v-model="warn.minutes" class="text-black px-2 py-1 bg-gray-300 w-14" :disabled="running" :class="{'opacity-50':running}" />
+                <input type="number" v-model="warn.minutes" class="w-14" :disabled="running" :class="{'opacity-50':running}" />
             </label>
         </div>
     </div>

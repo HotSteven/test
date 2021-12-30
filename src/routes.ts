@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Axios from '@/views/Axios.vue'
+import Socket from '@/views/Socket.vue'
 import Tools from '@/views/Tools.vue'
 import WebRTC from '@/views/WebRTC.vue'
 import NotFound from '@/views/404.vue'
@@ -26,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/axios',
     name: 'Axios',
     component: Axios
+  },
+  {
+    path: '/socket',
+    name: 'Socket',
+    component: Socket
   },
   {
     path: '/tools',
