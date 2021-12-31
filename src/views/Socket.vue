@@ -24,6 +24,7 @@ interface SocketData {
     group: string;
     message: string;
     logs: string[];
+    ackId: number;
     connected: boolean;
     connecting: boolean;
     groupjoined: boolean;
@@ -39,6 +40,7 @@ export default defineComponent({
             group: "",
             message: "",
             logs: [],
+            ackId: 0,
             connected: false,
             connecting: false,
             groupjoined: false
@@ -99,11 +101,11 @@ export default defineComponent({
                 this.logs.push(`${new Date().toISOString()} - Error: Not connected to server`);
                 throw 'Not connected to server';
             }
-            this.ws.send(JSON.stringify(
-                {
+            this.ws.send(
+                JSON.stringify({
                     type: "joinGroup",
-                    group: this.group
-                    // ackId: ackId // ackId is optional, use ackId to make sure this action is executed
+                    group: this.group,
+                    ackId: this.ackId++ // ackId is optional, use ackId to make sure this action is executed
                 }
             ));
             this.logs.push(`${new Date().toISOString()} - Joining group ${this.group}`);
@@ -122,8 +124,8 @@ export default defineComponent({
                 JSON.stringify({
                     type: "sendToGroup",
                     group: this.group,
-                    data: this.message
-                    // ackId: ackId // ackId is optional, use ackId to make sure this action is executed
+                    data: this.message,
+                    ackId: this.ackId++ // ackId is optional, use ackId to make sure this action is executed
                 }
             ));
             this.logs.push(`${new Date().toISOString()} - Sending message to group ${this.group}`);
